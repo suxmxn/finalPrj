@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Product(models.Model):
@@ -10,11 +11,12 @@ class Product(models.Model):
     color = models.CharField(max_length=20) # 컬러
     hook_text = models.CharField(max_length=100, blank=True)
 
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     product_image = models.ImageField(upload_to='shopping/images/%Y/%m/%d/', blank=True)  # 상품 이미지
     # category  # 카테고리
 
     def __str__(self):
-        return f'[{self.pk}]{self.name}'
+        return f'[{self.pk}]{self.name} :: {self.author}'
 
     def get_absolute_url(self):
         return f'/shopping/{self.pk}/'
