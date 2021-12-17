@@ -55,10 +55,11 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{product.product_image.url}}" alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
-                        <h1 class="display-5 fw-bolder">{{product.name}}</h1>
+                        <h2>{{product.maker}}</h2>
+                        <h1>{{product.name}}</h1>
                         <div class="fs-5 mb-5">
-                            <h3>{{product.price}}원</h3>
+                            <h5>{{product.price}}원</h5>
+                            <h5 class="text-muted">{{product.color}}</h5>
                         </div>
                         <p class="lead">{{product.content}}</p>
                         <div class="d-flex">

@@ -8,6 +8,7 @@ class Product(models.Model):
     maker = models.CharField(max_length=30) # 제조사
     made_at = models.DateTimeField()    # 제조년월
     color = models.CharField(max_length=20) # 컬러
+    hook_text = models.CharField(max_length=100, blank=True)
 
     product_image = models.ImageField(upload_to='shopping/images/%Y/%m/%d/', blank=True)  # 상품 이미지
     # category  # 카테고리
