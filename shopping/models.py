@@ -9,7 +9,7 @@ class Product(models.Model):
     made_at = models.DateTimeField()    # 제조년월
     color = models.CharField(max_length=20) # 컬러
 
-    # product_image  # 상품 이미지
+    product_image = models.ImageField(upload_to='shopping/images/%Y/%m/%d/', blank=True)  # 상품 이미지
     # category  # 카테고리
 
     def __str__(self):
