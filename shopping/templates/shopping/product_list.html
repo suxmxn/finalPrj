@@ -21,10 +21,12 @@
                                         <h6 class="text-muted">{{p.color}}</h6>
                                         <div class="small">{{p.hook_text}}</div>
                                     </div>
+                                    <br>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ p.get_absolute_url }}">View Details</a></div>
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ p.get_absolute_url }}">View Details</a></div>
+                                    <div class="small text-muted">Made At {{ p.made_at | date:"Y-m-d"}}</div>
                                 </div>
                             </div>
                         </div>
