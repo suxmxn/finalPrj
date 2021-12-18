@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from .models import Product, Category, Tag, Comment
 from .forms import CommentForm
+from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
 
@@ -158,3 +159,20 @@ class ProductUpdate(LoginRequiredMixin, UpdateView):
             return super(ProductUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
+class ProductSearch(ProductList):
+    paginate_by = None
+
+    def get_queryset(self):
+        q = self.kwargs['q']
+        product_list = Product.objects.filter(
+            Q(name__contains=q) | Q(tags__name__contains=q)
+        ).distinct()
+        return product_list
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductSearch, self).get_context_data()
+        q = self.kwargs['q']
+        context['search_info'] = f'Search: {q} ({self.get_queryset().count()})'
+
+        return context
