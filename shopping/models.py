@@ -51,3 +51,16 @@ class Product(models.Model):
 
     def get_content_markdown(self):
         return markdown(self.content)
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  # 어떤 상품에 대한 댓글인지
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # 작성자
+    content = models.TextField()    # 댓글 내용
+    created_at = models.DateTimeField(auto_now_add=True)    # 작성일시
+    modified_at = models.DateTimeField(auto_now=True)   # 수정일시
+
+    def __str__(self):
+        return f'{self.author}::{self.content}'
+    
+    def get_absolute_url(self):
+        return f'{self.product.get_absolute_url()}#comment-{self.pk}'

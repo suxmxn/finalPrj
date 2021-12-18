@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Product, Category, Tag
+from .models import Product, Category, Tag, Comment
 from markdownx.admin import MarkdownxModelAdmin
 
 # Register your models here.
 admin.site.register(Product, MarkdownxModelAdmin)
+admin.site.register(Comment)
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
