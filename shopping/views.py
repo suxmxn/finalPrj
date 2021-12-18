@@ -17,7 +17,6 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
         else:
             raise PermissionDenied
 
-
 def new_comment(request, pk):
     if request.user.is_authenticated:
         product = get_object_or_404(Product, pk=pk)
@@ -31,6 +30,15 @@ def new_comment(request, pk):
                 return redirect(comment.get_absolute_url())
         else:
             return redirect(product.get_absolute_url())
+    else:
+        raise PermissionDenied
+
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    product = comment.product
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+        return redirect(product.get_absolute_url())
     else:
         raise PermissionDenied
 
