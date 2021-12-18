@@ -11,6 +11,11 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{product.product_image.url}}" alt="..." /></div>
                     <div class="col-md-6">
+                        {% if product.category %}
+                            <span class="badge badge-secondary float-right">{{ product.category }}</span>
+                        {% else %}
+                            <span class="badge badge-secondary float-right">미분류</span>
+                        {% endif %}
                         <h2>{{product.maker}}</h2>
                         <h1>{{product.name}}</h1>
                         <div class="fs-5 mb-5">
