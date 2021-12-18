@@ -22,7 +22,7 @@
                             <h5>{{product.price}}원</h5>
                             <h5 class="text-muted">{{product.color}}</h5>
                         </div>
-                        <p class="lead">{{product.content}}</p>
+                        <p class="lead">{{ product.get_content_markdown | safe }}</p>
                         {% if product.tags.exists %}
                             <i class="fas fa-tags"></i>
                             {% for tag in product.tags.iterator %}

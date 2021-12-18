@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdown
 
 # Create your models here.
 class Tag(models.Model):
@@ -28,7 +30,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=30)  # 상품명
-    content = models.TextField()    # 설명
+    content = MarkdownxField()    # 설명
     price = models.CharField(max_length=20) # 상품 가격
     maker = models.CharField(max_length=30) # 제조사
     made_at = models.DateTimeField()    # 제조년월
@@ -46,3 +48,6 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return f'/shopping/{self.pk}/'
+
+    def get_content_markdown(self):
+        return markdown(self.content)

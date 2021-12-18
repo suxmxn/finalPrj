@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('shopping/', include('shopping.urls')),
     path('admin/', admin.site.urls),
+    path('markdownx/', include('markdownx.urls')),
     path('', include('single_pages.urls')),
 ]
 
