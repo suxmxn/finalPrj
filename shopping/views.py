@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Product, Category
+from .models import Product, Category, Tag
 
 class ProductList(ListView):
     model = Product
@@ -35,5 +35,18 @@ def category_page(request, slug):
                       'categories': Category.objects.all(),
                       'no_category_product_count': Product.objects.filter(category=None).count(),
                       'category': category,
+                  }
+                  )
+
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    product_list = tag.product_set.all()
+
+    return render(request, 'shopping/product_list.html',
+                  {
+                      'product_list': product_list,
+                      'tag': tag,
+                      'categories': Category.objects.all(),
+                      'no_category_product_count': Product.objects.filter(category=None).count(),
                   }
                   )
