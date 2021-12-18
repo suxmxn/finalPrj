@@ -6,12 +6,17 @@
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                         {% for p in product_list %}
-                        <div class="col mb-5">
+                        <div class="col mb-5" id="post-{{p.pk}}">
                             <div class="card h-100">
                                 <!-- Product image-->
                                 <img class="card-img-top" src="{{p.product_image.url}}" alt="..." />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
+                                    {% if p.category %}
+                                        <span class="badge badge-secondary float-right">{{ p.category }}</span>
+                                    {% else %}
+                                        <span class="badge badge-secondary float-right">미분류</span>
+                                    {% endif %}
                                     <div class="text-center">
                                         <!-- Product name-->
                                         <div class="small">{{p.maker}}</div>
