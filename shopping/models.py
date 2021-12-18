@@ -52,6 +52,12 @@ class Product(models.Model):
     def get_content_markdown(self):
         return markdown(self.content)
 
+    def get_avatar_url(self):
+        if self.author.socialaccount_set.exists():
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else :
+            return 'https://doitdjango.com/avatar/id/391/b4bd3e4d86e66342/svg/{self.author.email}/'
+
 class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  # 어떤 상품에 대한 댓글인지
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # 작성자
