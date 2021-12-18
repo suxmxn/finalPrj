@@ -45,6 +45,7 @@ def delete_comment(request, pk):
 class ProductList(ListView):
     model = Product
     ordering = 'pk'
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super(ProductList, self).get_context_data()
