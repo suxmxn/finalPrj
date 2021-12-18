@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Product, Category, Tag
 
 class ProductList(ListView):
@@ -50,3 +51,15 @@ def tag_page(request, slug):
                       'no_category_product_count': Product.objects.filter(category=None).count(),
                   }
                   )
+
+class ProductCreate(LoginRequiredMixin, CreateView):
+    model = Product
+    fields = ['name', 'price', 'hook_text', 'content', 'product_image', 'made_at', 'category']
+
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.author = current_user
+            return super(ProductCreate, self).form_valid(form)
+        else:
+            return redirect('/shopping/')
