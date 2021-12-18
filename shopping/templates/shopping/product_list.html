@@ -1,6 +1,14 @@
 {% extends 'shopping/base.html' %}
 
 {% block main_area %}
+            {% if user.is_authenticated %}
+                    {% if user.is_staff or user.is_superuser %}
+                        <a class="btn btn-info btn-small float-right" href="/shopping/create_product/" role="button">
+                            <i class="fas fa-pen"></i>New Post
+                        </a>
+                    {% endif %}
+            {% endif %}
+
             <h1>
                 {% if category %}<span class="badge badge-secondary">{{ category }}</span>{% endif %}
                 {% if tag %}<span class="badge badge-light"><i class="fas fa-tags"></i>{{ tag }} ({{ tag.product_set.count }})</span>{% endif %}
