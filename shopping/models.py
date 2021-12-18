@@ -3,6 +3,16 @@ from django.contrib.auth.models import User
 import os
 
 # Create your models here.
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/shopping/tag/{self.slug}/'
+
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
@@ -23,11 +33,13 @@ class Product(models.Model):
     maker = models.CharField(max_length=30) # 제조사
     made_at = models.DateTimeField()    # 제조년월
     color = models.CharField(max_length=20) # 컬러
-    hook_text = models.CharField(max_length=100, blank=True)
+    hook_text = models.CharField(max_length=100, blank=True)    #요약문
 
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)  #작성자
     product_image = models.ImageField(upload_to='shopping/images/%Y/%m/%d/', blank=True)  # 상품 이미지
+
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)  # 카테고리
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return f'[{self.pk}]{self.name} :: {self.author}'
