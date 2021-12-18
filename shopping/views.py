@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Product, Category, Tag
+from django.core.exceptions import PermissionDenied
 
 class ProductList(ListView):
     model = Product
@@ -66,3 +67,15 @@ class ProductCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return super(ProductCreate, self).form_valid(form)
         else:
             return redirect('/shopping/')
+
+class ProductUpdate(LoginRequiredMixin, UpdateView):
+    model = Product
+    fields = ['name', 'price', 'hook_text', 'content', 'product_image', 'made_at', 'category', 'tags']
+
+    template_name = 'shopping/product_update_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(ProductUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
