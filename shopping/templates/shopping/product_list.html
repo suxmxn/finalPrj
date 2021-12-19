@@ -12,8 +12,7 @@
             <h1>
                 {% if search_info %} <small class="text-muted">{{search_info}}</small>{% endif %}
                 {% if category %}
-                <span class="badge badge-dark">{{ category }}</span>
-
+                <h1><span class="badge bage-light">{{ category }} ({{category.product_set.count}})</span></h1>
                 {% endif %}
                 {% if tag %}<span class="badge badge-light"><i class="fas fa-tags"></i>{{ tag }} ({{ tag.product_set.count }})</span>{% endif %}
             </h1>
@@ -23,37 +22,35 @@
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                         {% for p in product_list %}
                         <div class="col mb-5" id="post-{{p.pk}}">
-                            <div class="card h-100">
+                            <div class="card">
                                 <!-- Product image-->
                                 <img class="card-img-top" src="{{p.product_image.url}}" alt="..." />
                                 <!-- Product details-->
-                                <div class="card-body p-4">
+                                <div class="card-body">
                                     {% if p.category %}
-                                        <span class="badge badge-dark justify-content-center">{{ p.category }}</span>
+                                        <span class="btn btn-light justify-content-center">{{ p.category }}</span>
                                     {% endif %}
+
                                     <div class="text-center">
                                         <!-- Product name-->
-                                        <h5 class="fw-bolder">{{p.name}}</h5>
+                                        <h5 class="card-title">{{p.name}}</h5>
                                         <!-- Product price-->
-                                        <h6>{{p.price}}원</h6>
-                                        <h6 class="text-muted">{{p.color}}</h6>
+                                        <h6><i class="fas fa-won-sign"></i>{{p.price}}</h6>
                                         <div class="small">{{p.hook_text}}</div>
                                     </div>
-                                    <br>
                                     {% if p.tags.exists %}
-                                        <i class="fas fa-tags"></i>
-                                        {% for tag in p.tags.iterator %}
-                                            <a href="{{ tag.get_absolute_url }}"><span class="badge badge-pill badge-light">{{ tag}}</span></a>
-                                        {% endfor %}
-                                        <br/>
-                                        <br/>
-                                    {% endif %}
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ p.get_absolute_url }}">View Details</a></div>
+                                                <i class="fas fa-tags"></i>
+                                                {% for tag in p.tags.iterator %}
+                                                    <a href="{{ tag.get_absolute_url }}"><span class="badge badge-pill badge-light">{{ tag}}</span></a>
+                                                {% endfor %}
+                                            {% endif %}
+                                    <br/><br/>
+                                    <div class="text-center"><a class="btn btn-outline-dark btn-sm mt-auto" href="{{ p.get_absolute_url }}">View Details</a></div>
                                 </div>
                                 <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="card-footer text-muted">
                                     <div class="small text-muted">Made At {{ p.made_at | date:"Y-m-d"}}</div>
-                                </div>
+                                  </div>
                             </div>
                         </div>
                         {% endfor %}

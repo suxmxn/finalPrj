@@ -10,7 +10,7 @@
                 <li class="nav-item">
                     <div class="input-group">
                         <input class="form-control" id="search-input" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-sm" id="button-search" type="button" onclick="searchPost();" style="background-color:#ddc3f7;"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-sm" id="button-search" type="button" onclick="searchPost();"><i class="fas fa-search"></i></button>
                     </div>
                 </li>
                 <li class="nav-item active">
@@ -47,9 +47,9 @@
                     </li>
                 {% else %}
                 <li class="nav-item">
-                    <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                    <a role="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#loginModal">
                             Log In
-                        </a>
+                    </a>
                 </li>
                 {% endif %}
             </ul>

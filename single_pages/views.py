@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from shopping.models import Product, Comment, Category
+from shopping.models import Product, Comment, Category, Tag
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -26,10 +26,12 @@ def about_me(request):
 
 def about_company(request):
     category = Category.objects.all()
+    tag = Tag.objects.all()
     return render(
         request,
         'single_pages/about_company.html',
         {
             'category': category,
+            'tag': tag,
         }
     )

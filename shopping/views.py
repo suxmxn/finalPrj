@@ -56,12 +56,14 @@ class ProductList(ListView):
 
 class ProductDetail(DetailView):
     model = Product
+#    related_product = Product.objects.order_by('-pk')[:4]
 
     def get_context_data(self, **kwargs):
         context = super(ProductDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_product_count'] = Product.objects.filter(category=None).count()
         context['comment_form'] = CommentForm
+        context['related_product'] = Product.objects.order_by('-pk')[:4]
         return context
 
 def category_page(request, slug):
