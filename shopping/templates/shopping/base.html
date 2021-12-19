@@ -7,38 +7,28 @@
     <link href="{% static 'shopping/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
     <script src="https://kit.fontawesome.com/d257f1cd6a.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 {% include 'shopping/navbar.html' %}
 
  <!-- Header-->
-<header class="bg-dark py-4">
+<header class="py-4" style="background-color:#d3f1f2;">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Shop in style</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+            <h1 class="text-uppercase text-dark" style="font-family:'Caveat', cursive; font-size:50px;">Better</h1>
+            <p class="lead fw-normal text-black-50 mb-0" style="font-size:25px;">Welcome to our shopping mall!</p>
+            <p class="lead fw-normal text-black-50 mb-0" style="font-size:25px;">Look around the shoes as much as you want.</p>
         </div>
     </div>
 </header>
 
 <div class="container mt-3">
     <div class="row">
-        <div class="col-md-8 col-lg-9">
-            {% block main_area %}
-            {% endblock %}
-        </div>
          <!-- Side widgets-->
         <div class="col-md-4 col-lg-3 py-5">
-            <!-- Search widget-->
-            <div class="card mb-4">
-                <div class="card-header">Search</div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input class="form-control" id="search-input" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button" onclick="searchPost();">Go!</button>
-                    </div>
-                </div>
-            </div>
             <!-- Categories widget-->
             <div class="card mb-4" id="categories-card">
                 <div class="card-header">Categories</div>
@@ -46,13 +36,16 @@
                     <div class="row">
                         <ul>
                             {% for category in categories %}
-                                <li><a href="{{category.get_absolute_url}}">{{ category }} ({{ category.product_set.count }})</a></li>
+                                <li><a class="text-dark" href="{{category.get_absolute_url}}">{{ category }} ({{ category.product_set.count }})</a></li>
                             {% endfor %}
-                                <li><a href="/shopping/category/no_category/">미분류 ({{ no_category_product_count }})</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-8 col-lg-9">
+            {% block main_area %}
+            {% endblock %}
         </div>
     </div>
 </div>

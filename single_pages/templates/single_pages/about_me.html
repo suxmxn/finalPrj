@@ -1,19 +1,56 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>About Me</title>
+    <link rel="stylesheet" href="{% static 'shopping/bootstrap/bootstrap.min.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/d257f1cd6a.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-<nav>
-  <a href="/shopping/">ShoppingMall</a>
-  <a href="/about_me/">About Me</a>
-  <a href="/about_company/">About Company</a>
-</nav>
+{% include 'shopping/navbar.html' %}
+<!-- Header - set the background image for the header in the line below-->
+        <header class="py-5 bg-image-full" style="background-image: url('{% static 'single_pages/images/billy-unsplash.jpg' %}'); width=100px;">
+            <div class="text-center my-5">
 
-<h1>안녕하세요 이수민입니다!</h1>
-<h2>이력</h2>
-<h2>Portfolio</h2>
-<h3>아직 공사중입니다.</h3>
+                {% if user.is_authenticated %}
+                {% if user.socialaccount_set.all.0.get_avatar_url %}
+                <img class="rounded-circle" width="100px"
+                               src="{{user.socialaccount_set.all.0.get_avatar_url}}">
+                {% else %}
+                          <img class="rounded-circle" width="100px"
+                               src="https://doitdjango.com/avatar/id/391/b4bd3e4d86e66342/svg/{self.author.email}">
+
+
+
+                <h1 class="text-white fs-3 fw-bolder">{{ user.username }}</h1>
+                <p class="text-white-50 mb-0">{{ user.email }}</p>
+
+            </div>
+        </header>
+<div>
+    {%for c in comments%}
+    {% if user.is_authenticated and c.author == user %}
+    <div class="card mt-1">
+        <div class="card-header">Comments</div>
+        <div class="card-body">
+            <h5>Shoes: {{c.product.name}}</h5>
+            <div>
+                {{c.content}}
+            </div>
+        </div>
+    </div>
+    {%endif%}
+    {%endfor%}
+</div>
+{% endif %}
+{%endif%}
+
+
+    {% include 'shopping/footer.html' %}
+
 </body>
 </html>

@@ -46,7 +46,7 @@ def delete_comment(request, pk):
 class ProductList(ListView):
     model = Product
     ordering = 'pk'
-    paginate_by = 8
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super(ProductList, self).get_context_data()
@@ -166,7 +166,7 @@ class ProductSearch(ProductList):
     def get_queryset(self):
         q = self.kwargs['q']
         product_list = Product.objects.filter(
-            Q(name__contains=q) | Q(tags__name__contains=q)
+            Q(name__contains=q) | Q(tags__name__contains=q) | Q(category__name__contains=q)
         ).distinct()
         return product_list
 
