@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>{% block head_title %}ShoppingMall{% endblock %}</title>
+    <title>{% block head_title %}BETTER{% endblock %}</title>
     <link href="{% static 'shopping/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
     <script src="https://kit.fontawesome.com/d257f1cd6a.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -15,15 +15,16 @@
 {% include 'shopping/navbar.html' %}
 
  <!-- Header-->
-<header class="py-4" style="background-color:#d3f1f2;">
+<header class="py-4" style="background-image: url('{% static 'shopping/images/e6f982c4719da2e8fe60.jpg' %}')">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="text-uppercase text-dark" style="font-family:'Caveat', cursive; font-size:50px;">Better</h1>
-            <p class="lead fw-normal text-black-50 mb-0" style="font-size:25px;">Welcome to our shopping mall!</p>
-            <p class="lead fw-normal text-black-50 mb-0" style="font-size:25px;">Look around the shoes as much as you want.</p>
+            <h1 class="text-uppercase" style="font-family:'Caveat', cursive; font-size:50px;">Better</h1>
+            <p class="lead fw-normal mb-0" style="font-size:25px;">Welcome to our shopping mall!</p>
+            <p class="lead fw-normal mb-0" style="font-size:25px;">Look around the shoes as much as you want.</p>
         </div>
     </div>
 </header>
+
 
 <div class="container mt-3">
     <div class="row">
@@ -31,8 +32,8 @@
         <div class="col-md-4 col-lg-3 py-5">
             <!-- Categories widget-->
             <div class="card mb-4" id="categories-card">
+                <div class="card-header" style="background-color:#FDF6AB;"><h5 class="card-title"><i class="fas fa-list"></i>&nbsp;&nbsp;Categories</h5></div>
                 <div class="card-body">
-                    <h5 class="card-title">Categories</h5>
                     <div class="row">
                         <ul>
                             {% for category in categories %}

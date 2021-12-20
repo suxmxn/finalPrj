@@ -13,15 +13,15 @@
 <body>
 {% include 'shopping/navbar.html' %}
 <!-- Header - set the background image for the header in the line below-->
-<header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
+{% if user.is_authenticated %}
+<header class="py-5 bg-image-full" style="background-image: url('{% static 'single_pages/images/wp7197060.webp' %}')">
     <div class="text-center my-5">
-        {% if user.is_authenticated %}
-                {% if user.socialaccount_set.all.0.get_avatar_url %}
-                    <img class="rounded-circle" width="100px" src="{{user.socialaccount_set.all.0.get_avatar_url}}">
-                {% else %}
-                    <img class="rounded-circle" width="100px" src="https://doitdjango.com/avatar/id/391/b4bd3e4d86e66342/svg/{self.author.email}">
-                <h1 class="text-white fs-3 fw-bolder">{{ user.username }}</h1>
-                <h5 class="text-white-50 mb-0">{{ user.email }}</h5>
+        {% if user.socialaccount_set.all.0.get_avatar_url %}
+            <img class="rounded-circle" width="100px" src="{{user.socialaccount_set.all.0.get_avatar_url}}">
+        {% else %}
+            <img class="rounded-circle" width="100px" src="https://doitdjango.com/avatar/id/485/a19aace6edb37275/svg/{self.author.email}">
+        <h1 class="fs-3 fw-bolder">{{ user.username }}</h1>
+        <h5 class="mb-0">{{ user.email }}</h5>
     </div>
 </header>
 
@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <h2><span class="badge badge-light float-left">Comments</span></h2><br/>
+            <h2><span class="badge badge-light float-left">My Comments</span></h2><br/>
             {%for c in comments%}
             {% if user.is_authenticated and c.author == user %}
             <div class="card mt-1">

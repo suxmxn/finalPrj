@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="{% static 'shopping/bootstrap/bootstrap.min.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'single_pages/css/home.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/d257f1cd6a.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,26 +18,25 @@
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-lg-6">
-                <h1 class="text-uppercase text-dark" style="font-family:'Caveat', cursive; font-size:70px;">BETTER</h1><br/><br/>
-                <h4><p style="font-family: 'Gowun Dodum', sans-serif;"><span style="font-family:'Caveat', cursive;">BETTER</span>&nbsp;쇼핑몰은
-                사람들이 더 나은 신발을 신고 발이 편안하게 살아갈 수 있도록 신발 구매를 도와주는 쇼핑몰입니다.
-                    브래드 별로 또는 원하는 종류 별로 나누어서 원하는 신발을 빠르고 정확하게 찾을 수 있도록 도와줍니다.</p></h4>
+                <h1 class="text-uppercase text-white" style="font-family:'Caveat', cursive; font-size:70px;">BETTER</h1><br/><br/><br/>
+                <h4 class="text-white"><p style="font-family: 'Gowun Dodum', sans-serif;"><span style="font-family:'Caveat', cursive;">BETTER</span>&nbsp;쇼핑몰은
+                    사람들이 더 나은 신발을 신고 발이 편안하게 살아갈 수 있도록 신발 구매를 도와주는 쇼핑몰입니다.<br/>브랜드 별로 또는 원하는 종류 별로 나누어서 원하는 신발을 빠르고 정확하게 찾을 수 있도록 도와줍니다.</p></h4>
             </div>
             <div class="col-lg-6">
-                <span style="font-size:30px;">Recent Products</span>
+                <span class="text-white" style="font-size:35px;">New Releases</span>
                 {% for product in recent_products%}
                 <div class="card mt-1">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-4">
-                                <img src="{{product.product_image.url}}" width="120px" alt="..." />
+                                <img class="rounded-circle" src="{{product.product_image.url}}" width="120px" alt="..." />
                             </div>
                             <div class="col-lg-8">
-                                <h4>
-                                    <a href="{{product.get_absolute_url}}" class="text-decoration-none text-dark">{{product.name}}&nbsp;&nbsp;</a><br/>
-                                </h4>
-                                <h6>{{product.price}}원</h6>
-                                <small>{{product.hook_text}}</small>
+                                <h5>
+                                    <a href="{{product.get_absolute_url}}" class="text-decoration-none text-dark">{{product.maker}}&nbsp;&nbsp;{{product.name}}&nbsp;&nbsp;</a><br/>
+                                </h5>
+                                <h7><i class="fas fa-won-sign"></i>{{product.price}}&nbsp;&nbsp;<i class="fas fa-palette"></i>{{product.color}}</h7><br>
+                                <small><br>{{product.hook_text}}</small>
                             </div>
                         </div>
                     </div>

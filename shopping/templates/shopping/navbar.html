@@ -6,11 +6,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <div class="input-group">
                         <input class="form-control" id="search-input" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-sm" id="button-search" type="button" onclick="searchPost();"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-sm" id="button-search" type="button" onclick="searchPost();" style="background-color:#FDF6AB;"><i class="fas fa-search"></i></button>
                     </div>
                 </li>
                 <li class="nav-item active">
@@ -35,7 +36,7 @@
                                src="{{user.socialaccount_set.all.0.get_avatar_url}}">
                           {% else %}
                           <img class="rounded-circle" width="25px"
-                               src="https://doitdjango.com/avatar/id/391/b4bd3e4d86e66342/svg/{self.author.email}">
+                               src="https://doitdjango.com/avatar/id/485/a19aace6edb37275/svg/{self.author.email}">
                           {% endif %}
                           {{ user.username }}
                       </a>
@@ -73,9 +74,13 @@
                                 href="{% provider_login_url 'google' %}">
                                 <i class="fab fa-google"></i>&nbsp;&nbsp;Log in with Google
                             </a>
-                            <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="/accounts/login/"><i class="far fa-envelope"></i>&nbsp;&nbsp;Log in with E-mail</a>
+                            <a role="button" class="btn btn-outline-primary btn-block btn-sm" href="/accounts/login/"><i class="far fa-envelope"></i>&nbsp;&nbsp;Log in with E-mail</a>
                         </div>
                         <div class="col-md-6">
+                            <a role="button" class="btn btn-outline-success btn-block btn-sm"
+                                href="{% provider_login_url 'naver' %}">
+                                <i class="fab fa-internet-explorer"></i>&nbsp;&nbsp;Log in with Naver
+                            </a>
                             <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="/accounts/signup/"><i class="far fa-envelope"></i>&nbsp;&nbsp;Sign Up with E-mail</a>
                         </div>
                     </div>

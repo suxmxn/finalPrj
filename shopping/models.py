@@ -58,7 +58,7 @@ class Product(models.Model):
         if self.author.socialaccount_set.exists():
             return self.author.socialaccount_set.first().get_avatar_url()
         else :
-            return 'https://doitdjango.com/avatar/id/391/b4bd3e4d86e66342/svg/{self.author.email}/'
+            return 'https://doitdjango.com/avatar/id/485/a19aace6edb37275/svg/{self.author.email}/'
 
 class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  # 어떤 상품에 대한 댓글인지
@@ -75,6 +75,9 @@ class Comment(models.Model):
 
     def get_avatar_url(self):
         if self.author.socialaccount_set.exists():
-            return self.author.socialaccount_set.first().get_avatar_url()
+            if self.author.socialaccount_set.first().get_avatar_url():
+                return self.author.socialaccount_set.first().get_avatar_url()
+            else:
+                return 'https://doitdjango.com/avatar/id/485/a19aace6edb37275/svg/{self.author.email}/'
         else :
-            return 'https://doitdjango.com/avatar/id/391/b4bd3e4d86e66342/svg/{self.author.email}/'
+            return 'https://doitdjango.com/avatar/id/485/a19aace6edb37275/svg/{self.author.email}/'
